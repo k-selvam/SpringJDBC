@@ -14,48 +14,39 @@ import org.springframework.stereotype.Repository;
 import basic.model.Student;
 
 @Repository("studentDao")
-public class StudentDaoImpl  implements StudentDao{
+public class StudentDaoImpl implements StudentDao {
 
 	@Autowired
-	private JdbcTemplate jdbcTemplate ;
+	private JdbcTemplate jdbcTemplate;
 
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-
-
-
 	@Override
 	public void insert(Student student) {
-		//INSERT INTO `student` (`_id`, `name`, `semester`, `average`) 
-		//VALUES ('9', 'yahas', '2', '67');
+		// INSERT INTO `student` (`_id`, `name`, `semester`, `average`)
+		// VALUES ('9', 'yahas', '2', '67');
 		String sql = "INSERT INTO student VALUES (?,?,?,?)";
-		Object[] objects =	{student.getId(),student.getName(),student.getSem(),student.getAverage()};
+		Object[] objects = { student.getId(), student.getName(), student.getSem(), student.getAverage() };
 
-		int no_rows_inserted =	jdbcTemplate.update(sql,objects);
-		System.out.println("no of rows inserted  is"+ no_rows_inserted);
+		int no_rows_inserted = jdbcTemplate.update(sql, objects);
+		System.out.println("no of rows inserted  is" + no_rows_inserted);
 	}
-
-
-
 
 	@Override
 	public void delRecordById(int id) {
 		String delSql = "DELETE FROM student WHERE id = ?";
-		int noRecordsDeleted = jdbcTemplate.update(delSql,id);
-		System.out.println("no of records deleted = "+ noRecordsDeleted);
+		int noRecordsDeleted = jdbcTemplate.update(delSql, id);
+		System.out.println("no of records deleted = " + noRecordsDeleted);
 	}
-
-
-
 
 	@Override
 	public int delRecordByNameORSem(String studentName, int sem) {
-		String sql = "DELETE FROM student WHERE name = ? OR semester = ?"; //replace OR with AND and see the results
-		Object[] objects = {studentName,sem};
+		String sql = "DELETE FROM student WHERE name = ? OR semester = ?"; // replace OR with AND and see the results
+		Object[] objects = { studentName, sem };
 		int noRecordsDeleted = jdbcTemplate.update(sql, objects);
-		System.out.println("no of records deleted ="+ noRecordsDeleted);
+		System.out.println("no of records deleted =" + noRecordsDeleted);
 		return noRecordsDeleted;
 	}
 
@@ -65,45 +56,32 @@ public class StudentDaoImpl  implements StudentDao{
 		System.out.println("table cleaned");
 	}
 
-
-
-
 	@Override
 	public void insert(List<Student> students) {
 		String sql = "INSERT INTO student VALUES (?,?,?,?)";
 		ArrayList<Object[]> sqlArgs = new ArrayList<>();
-		for(Student student : students) {
-			Object[] studentData =	{student.getId(),student.getName(),student.getSem(),student.getAverage()};
+		for (Student student : students) {
+			Object[] studentData = { student.getId(), student.getName(), student.getSem(), student.getAverage() };
 			sqlArgs.add(studentData);
 		}
-		
+
 		jdbcTemplate.batchUpdate(sql, sqlArgs);
 	}
-
-
-
 
 	@Override
 	public List<Student> getAllStudents() {
 		String sql = "SELECT * FROM student";
-		List<Student> students = jdbcTemplate.query(sql,new StudentResultSetExtractor());
-				//new StudentRowMapper());
-		
+		List<Student> students = jdbcTemplate.query(sql, new StudentResultSetExtractor());
+		// new StudentRowMapper());
+
 		return students;
 	}
-
-
-
 
 	@Override
 	public Student findStudentById(int id) {
 		String sql = "SELECT * FROM student WHERE id = ?";
-		Student student =	jdbcTemplate.queryForObject(sql, 
-				new BeanPropertyRowMapper<Student>(Student.class),id);
+		Student student = jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<Student>(Student.class), id);
 		return student;
 	}
-	
-
-
 
 }

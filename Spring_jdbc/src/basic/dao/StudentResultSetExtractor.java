@@ -16,7 +16,7 @@ public class StudentResultSetExtractor implements ResultSetExtractor<List<Studen
 	public List<Student> extractData(ResultSet rs) throws SQLException, DataAccessException {
 		System.out.println("extractData method called");
 		List<Student> students = new ArrayList<>();
-		while(rs.next()) {
+		while (rs.next()) {
 			Student student = new Student();
 			student.setId(rs.getInt("id"));
 			student.setName(rs.getString("name"));
@@ -24,7 +24,7 @@ public class StudentResultSetExtractor implements ResultSetExtractor<List<Studen
 			student.setAverage(rs.getInt("average"));
 			students.add(student);
 		}
-		
+
 		return students;
 	}
 

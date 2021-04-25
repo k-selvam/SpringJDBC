@@ -13,7 +13,7 @@ public class StudentDaoHelper {
 	@Autowired
 	StudentDao studentDaoImpl;
 
-	void insertStudents(){
+	void insertStudents() {
 		Student s1 = new Student(1, "students name1", 1, 11);
 		Student s2 = new Student(2, "students name2", 2, 22);
 		Student s3 = new Student(3, "students name3", 3, 33);
