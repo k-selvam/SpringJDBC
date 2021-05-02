@@ -96,7 +96,7 @@ public class StudentDaoImpl  implements StudentDao{
 
 	@Override
 	public Student findStudentById(int id) {
-		String sql = "SELECT * FROM STUDENT WHERE _id = ?";
+		String sql = "SELECT * FROM student WHERE id = ?";
 		Student student =	jdbcTemplate.queryForObject(sql, 
 				new BeanPropertyRowMapper<Student>(Student.class),id);
 		return student;

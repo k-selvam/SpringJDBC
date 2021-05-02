@@ -20,19 +20,21 @@ public class PlayJdbc {
 		
 		
 		  StudentDaoImpl studentDao = (StudentDaoImpl) context.getBean("studentDao");
-		 /* 
-		 * System.out.println(studentDao.findStudentById(3));
-		 */
+		  
+		 // System.out.println(studentDao.findStudentById(4));
+		 
 		
-		  List<Student> students = studentDao.getAllStudents();
-		  printStudents(students);
+			/*
+			 * List<Student> students = studentDao.getAllStudents();
+			 * printStudents(students);
+			 */
 		 
 		
 		//studentDao.delRecordById(13);
 		
-		//insertStudent(studentDao);
+		insertStudent(studentDao);
 		//studentDao.cleanUp();
-		//studentDao.delRecordByNameORSem("ansari", 5);
+		//studentDao.delRecordByNameORSem("selvam", 5);
 	}
 
 	
@@ -48,8 +50,8 @@ public class PlayJdbc {
 
 
 	private static void insertStudent(StudentDao studentDao) {
-		Student myStudent = new Student(5, "bapji", 5, 55);
-		Student anotherStudent = new Student(6,"chandra",6,66);
+		Student myStudent = new Student(13, "selvam", 5, 85);
+		Student anotherStudent = new Student(4,"kiran",4,78);
 		//= new StudentDaoImpl();
 		studentDao.insert(myStudent);
 	}

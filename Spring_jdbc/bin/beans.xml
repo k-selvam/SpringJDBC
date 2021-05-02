@@ -26,7 +26,7 @@
 		<constructor-arg name="url"
 			value="jdbc:mysql://127.0.0.1:3306/spring_jdbc" />
 		<constructor-arg name="username" value="root" />
-		<constructor-arg name="password" value="pass1234" />
+		 <constructor-arg name="password" value="" /> 
 	</bean>
 
 	<bean id="studentDao" class="basic.dao.StudentDaoImpl">

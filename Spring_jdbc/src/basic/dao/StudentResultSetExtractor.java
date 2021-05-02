@@ -18,7 +18,7 @@ public class StudentResultSetExtractor implements ResultSetExtractor<List<Studen
 		List<Student> students = new ArrayList<>();
 		while(rs.next()) {
 			Student student = new Student();
-			student.setId(rs.getInt("_id"));
+			student.setId(rs.getInt("id"));
 			student.setName(rs.getString("name"));
 			student.setSem(rs.getInt("semester"));
 			student.setAverage(rs.getInt("average"));
